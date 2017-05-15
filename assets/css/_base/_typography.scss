@@ -1,11 +1,7 @@
-@font-face {
-  font-family: 'Cotham';
-  src: url('../fonts/CothamSans.woff') format('woff'), 
-		url('../fonts/CothamSans.ttf')  format('truetype');     
-}
-$sans: 'Cotham', 'Helvetica', sans-serif;
+$serif:"angie-sans",sans-serif;
+$sans:"aktiv-grotesk",sans-serif;;
 html {
-	font-family: $sans;
+	font-family: $serif;
 	font-size: 100%;
 	line-height: 1.2;
 	font-weight: 500;
