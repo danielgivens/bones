@@ -19,6 +19,20 @@
 	</script>
 </head>
 <body>
+	<?php
+		require_once('counter/conn.php');
+		require_once('counter/counter.php');
+		updateCounter("index");			
+		$sql = "SELECT * FROM ".$GLOBALS['hits_table_name'];
+		$query = $db->prepare($sql);
+		$query->execute();
+		$page_hits = $query->fetchAll();
+		$total_hits = 0;
+		foreach($page_hits as $ind_page){
+			$total_hits += $ind_page['count'];
+		}
+		$count = $total_hits;
+	?>
 	<div id="intro">
 		<h1>Turn on your sound</h1>
 		<span>B</span>
@@ -36,7 +50,7 @@
 	  <div class="box"><div><a href="mailto:woof@bones.dog">&#128140;<span>Send a love letter to woof@bones.dog</span></a></div></div>
 	</div>
 	<h1 id="cta" data-default="Good boy">Good boy</h1>
-	<div id="count"><h2>12</h2></div>
+	<div id="count"><h2><?php echo $count; ?></h2></div>
 	<div id="dog">
 		<img src="assets/images/bones-1.png" />
 		<img src="assets/images/bones-1.png" />		
