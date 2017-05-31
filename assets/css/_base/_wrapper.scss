@@ -5,24 +5,24 @@ html, body {
   text-align:center;
   background:white;
   color: black;
-  //overflow:hidden;
 }
 .preload{
 	z-index: 1;
 	opacity: 0;
 }
-h1{
+h1#cta{
 	position: fixed;
     top: 0;
     left: 50%;
     width: 100%;
     text-align: center;
     transform: translateX(-50%);
-    font-size: 2rem;
     z-index: 500;
     pointer-events: none;
     padding: 20px;
     border-bottom: 1px solid black;
+	@include fluid-type(16px, 100px, 320px, 2400px);
+    
 }
 #intro{
 	position: fixed;
@@ -46,11 +46,116 @@ h1{
 			display: block;
 		}
 	}
+	h1{
+		font-family: $sans;
+		position: fixed;
+		bottom:20px;
+		left:0;
+		width: 100%;
+		text-align: center;
+		opacity: 0;
+		visibility: hidden;
+	}	
+}
+.loaded{
+	#intro{
+		h1{
+			visibility: visible;
+			animation: flash 1s linear 2;
+		}
+	}
+}
+@include keyframes(flash){
+	0%{
+		opacity: 0;
+	}
+	50%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
 }
 .hide-intro{
 	#intro{
 		pointer-events: none;
 		transform:scale(0);
+	}
+}
+#profile{
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	background: #ecd8af;
+	transform:scale(0);
+	pointer-events: none;
+	z-index: 100000;	
+	transition: .5s $ease;
+	article{
+		padding: 0 0 10vw;
+		//text-align: left;
+		p{
+			@include fluid-type(16px, 100px, 320px, 2400px);
+			//font-family: ;
+			//text-indent: 60px;
+			margin: 40px 10vw;
+			&:nth-of-type(1){
+				//text-indent: 0;
+			}
+			a{
+				font-family: $sans;
+				font-size: 90%;
+				//text-decoration: none;
+				color: black;
+				&:hover{
+					text-decoration: none;
+				}
+			}
+			&.back{
+				font-family: $sans;
+				font-size: 90%;
+				text-decoration: underline;
+				cursor: pointer;
+				&:hover{
+					text-decoration: none;
+				}
+			}
+		}
+	}
+	figure{
+		position: fixed;
+		visibility: hidden;
+		pointer-events: none;
+		video{
+			width: 20vw;
+			height: auto;			
+		}
+		&:nth-of-type(1){
+		    top: 7vh;
+		    left: 10vh;			
+		}
+		&:nth-of-type(2){
+	        right: 15vw;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		&:nth-of-type(3){
+			left: 40%;
+			bottom: 5vh;
+			transform: translateX(-50%);
+		}
+		&.shown{
+			visibility: visible;
+		}
+	}
+}
+.show-about{
+	#profile{
+		transform: scale(1);
+		pointer-events: all;
 	}
 }
 #grid {
@@ -75,7 +180,7 @@ h1{
 			font-size: 400%;
 			position: relative;
 			transition: transform .25s $ease, top 0s $ease, opacity .25s $ease;
-			transform:scale(.3) translateY(0);
+			transform:scale(.5) translateY(0);
 			top:0;
 			cursor: pointer;
 			span{

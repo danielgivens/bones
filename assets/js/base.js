@@ -2,6 +2,8 @@ var timeout;
 var $eat;
 var $clickTimeout;
 var $countTimeout;
+var $aboutCycle;
+var mouse = new Array();
 var bark4 = new Howl({
 	src: ['assets/sounds/bark-1.m4a'],
 	autoplay: false,
@@ -14,10 +16,10 @@ var bark2 = new Howl({
 	volume: 0.1,
 	loop: false	
 });
-var bark1 = new Howl({
+var growl = new Howl({
 	src: ['assets/sounds/bark-3.m4a'],
 	autoplay: false,
-	volume: 0.1,
+	volume: 1,
 	loop: false	
 });
 var bark3 = new Howl({
@@ -129,6 +131,22 @@ var dog = (function () {
 		}, function(){
 			$('body').removeClass('show-treat'); 
 		});
+		$('.about').hover(function(){
+			bark2.volume(0.2);
+			bark2.stop();
+			bark2.play();
+		},function(){
+			bark2.volume(0);
+			bark2.stop();			
+		});
+		$('.about').click(function(){
+			$('body').addClass('show-about');
+			aboutCycle();
+		});
+		$('.back').click(function(){
+			$('body').removeClass('show-about');
+			clearTimeout($aboutCycle);
+		});
 		$('.box a').hover(function(){
 			squeak.volume(.2);
 			squeak.stop();
@@ -189,6 +207,20 @@ var dog = (function () {
 			}
 		});
 	}
+	$r = 3;
+	$i = 0;
+	function aboutCycle(){
+		$aboutCycle = setTimeout(function () {
+			if($i == $r){
+				$i = 0;
+			} 
+			$i++;
+			$('#profile figure.shown').removeClass('shown');
+			$('#profile figure:nth-of-type('+$i+') video').get(0).currentTime = 0;
+			$('#profile figure:nth-of-type('+$i+')').addClass('shown');
+			aboutCycle();					
+		}, 2000);
+	}
 	function mousemove(e) {
 		mouse = {x: e.clientX, y: e.clientY}
 	}
@@ -205,7 +237,7 @@ var dog = (function () {
 	  
 	$(document).on('mousemove', function() {
 		clearTimeout(timeout);
-		if($('.clicked').length <= 0 && $('body').hasClass('hide-intro')){	
+		if($('.clicked').length <= 0 && $('body').hasClass('hide-intro') && !$('body').hasClass('show-about')){	
 			if(!$('body').hasClass('show-treat')){
 			    sniff.volume(.5);
 				pant.volume(0);
@@ -215,7 +247,7 @@ var dog = (function () {
 					$('.clicked').removeClass('clicked'); 
 					sniff.fade(0.5, 0, 200);
 			    }, 200);
-			} else{
+			} else if(!$('body').hasClass('show-about')){
 			    sniff.volume(.5);
 				pant.volume(0);
 				$('#dog').removeClass('change');
@@ -252,31 +284,36 @@ $(window).blur(function() {
 	$('body').removeClass('show-treat'); 
 });
 $(window).load(function() {
-	$('#intro span:nth-of-type(1)').addClass('show');
-	bark1.play();
+	$('body').addClass('loaded');
 	setTimeout(function(){
-		$('#intro span:nth-of-type(1)').removeClass('show');
-		$('#intro span:nth-of-type(2)').addClass('show');
-		bark2.play();
+		$('#intro span:nth-of-type(1)').addClass('show');
+		bark4.play();		
 		setTimeout(function(){
-			$('#intro span:nth-of-type(2)').removeClass('show');
-			$('#intro span:nth-of-type(3)').addClass('show');
-			bark3.play();
+			$('#intro span:nth-of-type(1)').removeClass('show');
+			$('#intro span:nth-of-type(2)').addClass('show');
+			bark2.play();
 			setTimeout(function(){
-				$('#intro span:nth-of-type(3)').removeClass('show');
-				$('#intro span:nth-of-type(4)').addClass('show');		
-				bark4.play();		
+				$('#intro span:nth-of-type(2)').removeClass('show');
+				$('#intro span:nth-of-type(3)').addClass('show');
+				bark3.play();
 				setTimeout(function(){
-					$('#intro span:nth-of-type(4)').removeClass('show');
-					$('#intro span:nth-of-type(5)').addClass('show');	
-					bark5.play();			
+					$('#intro span:nth-of-type(3)').removeClass('show');
+					$('#intro span:nth-of-type(4)').addClass('show');		
+					bark4.play();		
 					setTimeout(function(){
-						$('body').addClass('hide-intro');
+						$('#intro span:nth-of-type(4)').removeClass('show');
+						$('#intro span:nth-of-type(5)').addClass('show');	
+						bark5.play();			
+						setTimeout(function(){
+							$('body').addClass('hide-intro');
+							//growl.play();		
+						},300);	
 					},300);	
-				},300);	
-			},300);			
-		},300);		
-	},300);
+				},300);			
+			},300);		
+		},300);
+	},600);
+
 });
 function commaSeparateNumber(val){
 	while (/(\d+)(\d{3})/.test(val.toString())){
