@@ -3,6 +3,13 @@
 ### EDIT HERE ###
 
 // DB CONNECT INFO
+//{lbw6F!c3S#
+/*
+$db_host = $_ENV['DATABASE_SERVER'];
+$db_name = "db65114_bones";
+$db_user = "db65114_bones";
+$db_pw = "{lbw6F!c3S#";	
+*/
 $db_host = "localhost";
 $db_name = "bones_counter";
 $db_user = "root";
