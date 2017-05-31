@@ -42,12 +42,12 @@
 		<span>S</span>
 	</div>
 	<div id="grid">
-	  <div class="box"><div class="about">&#128021;<span>View my profile</span></div></div>
-	  <div class="box"><div><a href="https://instagram.com/bones.dog" target="_blank">&#128247;<span>Follow @bones.dog on Instagram</span></a></div></div>
-	  <div class="box"><div><a href="https://twitter.com/bonesdotdog" target="_blank">&#128038;<span>Follow @bonesdotdog on Twitter</span></a></div></div>
-	  <div class="box"><div class="treat">&#127820;<span>Give me that banana!</span></div></div>
-	  <div class="box"><div class="treat">&#129363;<span>Give me some bacon!</div></div>
-	  <div class="box"><div><a href="mailto:woof@bones.dog">&#128140;<span>Send a love letter to woof@bones.dog</span></a></div></div>
+	  <div class="box hide-mobile"><div class="about">&#128021;<span>View my profile</span></div></div>
+	  <div class="box hide-mobile"><div><a href="https://instagram.com/bones.dog" target="_blank">&#128247;<span>Follow @bones.dog on Instagram</span></a></div></div>
+	  <div class="box hide-mobile"><div><a href="https://twitter.com/bonesdotdog" target="_blank">&#128038;<span>Follow @bonesdotdog on Twitter</span></a></div></div>
+	  <div class="box top"><div class="treat">&#127820;<span>Give me that banana!</span></div></div>
+	  <div class="box bottom"><div class="treat">&#129363;<span>Give me some bacon!</div></div>
+	  <div class="box hide-mobile"><div><a href="mailto:woof@bones.dog">&#128140;<span>Send a love letter to woof@bones.dog</span></a></div></div>
 	</div>
 	<h1 id="cta" data-default="Good boy">Good boy</h1>
 	<div id="count"><h2><?php echo $count; ?></h2></div>
@@ -102,7 +102,7 @@
 			<p class="back">Go Back</p>
 			<p>My name is Bones and I'm a whippet-minpin mix. I'm head of security at <a href="https://drxlr.com" target="_blank">Drexler</a>, but I just nap and act cute most of the time. When I grow up I am going to be a sweet potato farmer.</p>
 			<p>I found my humans through <a href="https://onedogmore.org/" target="_blank">One Dog More</a> and have been with them since I was 2. <a href="https://www.instagram.com/sacallage/" target="_blank">The pretty one</a> painted my portrait and <a href="https://www.instagram.com/danielgivens/" target="_blank">the big one</a> made this website for me.</p>
-			<p>Follow me on <a href="https://www.instagram.com/bones.dog/" target="_blank">Instagram</a> and <a href="https://twitter.com/bonesdotdog" target="_blank">Twitter</a> to see what I'm up to.</p>
+			<p>Follow me on <a href="https://www.instagram.com/bones.dog/" target="_blank">Instagram</a> and <a href="https://twitter.com/bonesdotdog" target="_blank">Twitter</a> to see what I'm up to. Send love letters to <a href="mailto:woof@bones.dog">woof@bones.dog</a>.</p>
 			<p class="back">Go Back</p>
 		</article>
 		<figure class="">

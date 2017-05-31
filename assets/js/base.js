@@ -122,14 +122,33 @@ var dog = (function () {
 		{x:mouse.x, y:mouse.y, z:1, },
 		{x:mouse.x, y:mouse.y, z:0, }
 	]
-
+	$(window).resize(function(){
+		if(!$('.hide-mobile').is(':visible')){
+			$mobile = true;
+			$('body').addClass('show-treat');
+			$('body').addClass('give-treat');
+		} else{
+			$('body').removeClass('show-treat');
+			$('body').removeClass('give-treat');
+			$mobile = false;
+		}		
+	});
 	function init() {
 		document.addEventListener('mousemove', mousemove);
 		setInterval(loop, 1000/fps);
+		if(!$('.hide-mobile').is(':visible')){
+			$mobile = true;
+			$('body').addClass('show-treat');
+			$('body').addClass('give-treat');
+		} else{
+			$mobile = false;
+		}
 		$('.treat').hover(function(){
 		   $('body').addClass('show-treat'); 
 		}, function(){
-			$('body').removeClass('show-treat'); 
+			if(!$mobile){
+				$('body').removeClass('show-treat'); 			
+			}
 		});
 		$('.about').hover(function(){
 			bark2.volume(0.2);
@@ -169,10 +188,12 @@ var dog = (function () {
 				$('.clicked').removeClass('clicked');
 			}
 		});
-		$('.treat').click(function(){
+		$('.treat').on('mousedown',function(){
 		    if($('#dog').hasClass('change')){
-				$('body').removeClass('show-treat'); 
-				$('body').removeClass('give-treat');
+			    if(!$mobile){
+					$('body').removeClass('show-treat'); 
+					$('body').removeClass('give-treat');
+				}
 				$(this).addClass('clicked'); 
 				clearTimeout($eat);
 				clearTimeout($clickTimeout);
@@ -234,8 +255,38 @@ var dog = (function () {
 		   setTimeout(transform, parts[i].z*delay, params );
 		};
 	}
-	  
-	$(document).on('mousemove', function() {
+
+	function touchHandler(event)
+	{
+	    var touches = event.changedTouches,
+	        first = touches[0],
+	        type = "";
+	    switch(event.type)
+	    {
+	        case "touchstart": type = "mousedown"; break;
+	        case "touchmove":  type = "mousemove"; break;        
+	        case "touchend":   type = "mouseup";   break;
+	        default:           return;
+	    }
+	
+	    // initMouseEvent(type, canBubble, cancelable, view, clickCount, 
+	    //                screenX, screenY, clientX, clientY, ctrlKey, 
+	    //                altKey, shiftKey, metaKey, button, relatedTarget);
+	
+	    var simulatedEvent = document.createEvent("MouseEvent");
+	    simulatedEvent.initMouseEvent(type, true, true, window, 1, 
+	                                  first.screenX, first.screenY, 
+	                                  first.clientX, first.clientY, false, 
+	                                  false, false, false, 0/*left*/, null);
+	
+	    first.target.dispatchEvent(simulatedEvent);
+	   //event.preventDefault();
+	}
+
+	document.addEventListener("touchmove", touchHandler, true);	  
+	document.addEventListener("touchend", touchHandler, true);	  
+	document.addEventListener("touchstart", touchHandler, true);	  
+	$(document).on('mousemove ', function() {
 		clearTimeout(timeout);
 		if($('.clicked').length <= 0 && $('body').hasClass('hide-intro') && !$('body').hasClass('show-about')){	
 			if(!$('body').hasClass('show-treat')){
@@ -251,11 +302,13 @@ var dog = (function () {
 			    sniff.volume(.5);
 				pant.volume(0);
 				$('#dog').removeClass('change');
-				$('body').removeClass('give-treat');
+				if(!$mobile){
+					$('body').removeClass('give-treat');				
+				}
 			    timeout = setTimeout(function() {
 					$('body').addClass('show-treat'); 
 					sniff.fade(0.5, 0, 200);
-				    pant.fade(0, 0.05, 200);	
+				    pant.fade(0, 0.05, 200);
 				    $('#dog').addClass('change');
 				    $('body').addClass('give-treat');	
 					$('.clicked').removeClass('clicked'); 
@@ -281,7 +334,9 @@ dog.init();
 $(window).blur(function() {
 	sniff.volume(0);
 	pant.volume(0);
-	$('body').removeClass('show-treat'); 
+	if(!$mobile){
+		$('body').removeClass('show-treat'); 
+	}
 });
 $(window).load(function() {
 	$('body').addClass('loaded');
