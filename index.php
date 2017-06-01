@@ -4,8 +4,41 @@
 	<title>Bones</title>
   	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="description" content="I am a 4 year old miniature pinscher/whippet mix in Baltimore." />
-  	<meta name="keywords" content="dog, whippet, minpin, rescue, woofer, pupper, doggo, bonesdotdog" />
+	<meta name="description" content="Woof! I am a dog.">
+	<meta itemprop="name" content="Bones">
+	<meta itemprop="description" content="Woof! I am a dog.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Bones">
+	<meta name="twitter:description" content="Woof! I am a dog.">
+	<meta name="twitter:site" content="@bonesdotdog">
+	<meta name="twitter:creator" content="@bonesdotdog">
+	<meta name="twitter:image:src" content="http://bones.dog/assets/images/tw.jpg">
+	<meta name="og:title" content="Bones">
+	<meta name="og:description" content="Woof! I am a dog.">
+	<meta name="og:image" content="http://bones.dog/assets/images/fb.jpg">
+	<meta name="og:url" content="http://bones.dog/">
+	<meta name="og:site_name" content="Bones">
+	<meta name="og:type" content="website">
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="assets/icon/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/icon/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/icon/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/icon/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="assets/icon/apple-touch-icon-60x60.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/icon/apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="assets/icon/apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/icon/apple-touch-icon-152x152.png" />
+	<link rel="icon" type="image/png" href="assets/icon/favicon-196x196.png" sizes="196x196" />
+	<link rel="icon" type="image/png" href="assets/icon/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/png" href="assets/icon/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="assets/icon/favicon-16x16.png" sizes="16x16" />
+	<link rel="icon" type="image/png" href="assets/icon/favicon-128.png" sizes="128x128" />
+	<meta name="application-name" content="&nbsp;"/>
+	<meta name="msapplication-TileColor" content="#FFFFFF" />
+	<meta name="msapplication-TileImage" content="assets/icon/mstile-144x144.png" />
+	<meta name="msapplication-square70x70logo" content="assets/icon/mstile-70x70.png" />
+	<meta name="msapplication-square150x150logo" content="assets/icon/mstile-150x150.png" />
+	<meta name="msapplication-wide310x150logo" content="assets/icon/mstile-310x150.png" />
+	<meta name="msapplication-square310x310logo" content="assets/icon/mstile-310x310.png" />
 	<script src="https://use.typekit.net/exa2crz.js"></script>
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 	<link rel="stylesheet" href="assets/css/style.css" />
