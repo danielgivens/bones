@@ -4,6 +4,7 @@ var $clickTimeout;
 var $countTimeout;
 var $aboutCycle;
 var mouse = new Array();
+$mobile = false;
 var bark4 = new Howl({
 	src: ['assets/sounds/bark-1.m4a'],
 	autoplay: false,
@@ -16,19 +17,13 @@ var bark2 = new Howl({
 	volume: 0.1,
 	loop: false	
 });
-var growl = new Howl({
-	src: ['assets/sounds/bark-3.m4a'],
-	autoplay: false,
-	volume: 1,
-	loop: false	
-});
 var bark3 = new Howl({
-src: ['assets/sounds/bark-5.m4a'],
-	autoplay: false,
-	volume: 0.1,
-	loop: false,
-	rate:0.88
-});
+	src: ['assets/sounds/bark-5.m4a'],
+		autoplay: false,
+		volume: 0.1,
+		loop: false,
+		rate:0.88
+	});
 var bark5 = new Howl({
 	src: ['assets/sounds/bark-4.m4a'],
 	autoplay: false,
@@ -61,8 +56,36 @@ var chomp = new Howl({
 	volume: 0,
 	loop: true	
 });
-var dog = (function () {
+$landscape = false;
 
+var dog = (function () {	  
+	window.addEventListener("orientationchange", function() {
+		if($(window).height() > $(window).width()){
+			$landscape = false;
+		} else{
+			$landscape = true;
+		}
+		setStage();
+	}, false);
+	if($(window).height() > $(window).width()){
+		$landscape = false;
+	} else{
+		$landscape = true;
+	}
+	$(window).on('resize load',function(){
+		if(!$('.hide-mobile').is(':visible')){
+			$mobile = true;
+			$('body').addClass('show-treat');
+			$('body').addClass('give-treat');
+			setStage();
+		} else{
+			$('body').removeClass('show-treat');
+			$('body').removeClass('give-treat');
+			$mobile = false;
+			setStage();
+		}	
+
+	});
 	var element = document.getElementById("dog")
 		, width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 		, height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -122,17 +145,25 @@ var dog = (function () {
 		{x:mouse.x, y:mouse.y, z:1, },
 		{x:mouse.x, y:mouse.y, z:0, }
 	]
-	$(window).resize(function(){
-		if(!$('.hide-mobile').is(':visible')){
-			$mobile = true;
-			$('body').addClass('show-treat');
-			$('body').addClass('give-treat');
+	function setStage(){
+		if(!$mobile){
+			$('#profile video').each(function(){
+				$src = $(this).attr('data-src');	
+				$(this).find('source').attr('src',$src);
+				$(this)[0].load();
+			});
+			mouse = {x: $(window).width()/2, y: $(window).height()/2}			
 		} else{
-			$('body').removeClass('show-treat');
-			$('body').removeClass('give-treat');
-			$mobile = false;
-		}		
-	});
+			if($landscape){
+				mouse = {x: $(window).width()/4, y: $(window).height()/2}			
+			} else{
+				mouse = {x: $(window).width()/2, y: $(window).height()/4}							
+			}
+			$('#profile video').each(function(){
+				$(this).find('source').attr('src','');				
+			});
+		}
+	}
 	function init() {
 		document.addEventListener('mousemove', mousemove);
 		setInterval(loop, 1000/fps);
@@ -151,9 +182,11 @@ var dog = (function () {
 			}
 		});
 		$('.about').hover(function(){
-			bark2.volume(0.2);
-			bark2.stop();
-			bark2.play();
+			if(!$mobile){
+				bark2.volume(0.2);
+				bark2.stop();
+				bark2.play();
+			}
 		},function(){
 			bark2.volume(0);
 			bark2.stop();			
@@ -167,9 +200,11 @@ var dog = (function () {
 			clearTimeout($aboutCycle);
 		});
 		$('.box a').hover(function(){
-			squeak.volume(.2);
-			squeak.stop();
-			squeak.play();
+			if(!$mobile){
+				squeak.volume(.2);
+				squeak.stop();
+				squeak.play();
+			}
 		},function(){
 			squeak.volume(0);
 			squeak.stop();
@@ -286,29 +321,37 @@ var dog = (function () {
 	document.addEventListener("touchmove", touchHandler, true);	  
 	document.addEventListener("touchend", touchHandler, true);	  
 	document.addEventListener("touchstart", touchHandler, true);	  
-	$(document).on('mousemove ', function() {
+	$(document).on('mousemove resize', function() {
 		clearTimeout(timeout);
 		if($('.clicked').length <= 0 && $('body').hasClass('hide-intro') && !$('body').hasClass('show-about')){	
 			if(!$('body').hasClass('show-treat')){
-			    sniff.volume(.5);
-				pant.volume(0);
+				if(!$mobile){
+				    sniff.volume(.5);
+					pant.volume(0);
+				}
 				$('body').removeClass('give-treat');
 				$('#dog').removeClass('change');
 			    timeout = setTimeout(function() {
-					$('.clicked').removeClass('clicked'); 
-					sniff.fade(0.5, 0, 200);
+					$('.clicked').removeClass('clicked');
+					if(!$mobile){ 
+						sniff.fade(0.5, 0, 200);
+					}
 			    }, 200);
 			} else if(!$('body').hasClass('show-about')){
-			    sniff.volume(.5);
-				pant.volume(0);
+				if(!$mobile){
+				    sniff.volume(.5);
+					pant.volume(0);
+				}
 				$('#dog').removeClass('change');
 				if(!$mobile){
 					$('body').removeClass('give-treat');				
 				}
 			    timeout = setTimeout(function() {
 					$('body').addClass('show-treat'); 
-					sniff.fade(0.5, 0, 200);
-				    pant.fade(0, 0.05, 200);
+					if(!$mobile){
+						sniff.fade(0.5, 0, 200);
+					    pant.fade(0, 0.05, 200);
+				    }
 				    $('#dog').addClass('change');
 				    $('body').addClass('give-treat');	
 					$('.clicked').removeClass('clicked'); 

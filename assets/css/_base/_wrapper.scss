@@ -180,18 +180,20 @@ h1#cta{
 		pointer-events: all;
 		min-height: 100vh;
 		height: auto;
-		margin-top: 100vh;
+		margin-top: 85vh;
 		figure{
 			display: none!important;
 		}	
 		article{
 			p{
-				
 				&.back{
 					display: none;
 				}
 			}
 		}
+	}	
+	@include breakpoint(tablet){
+		margin-top: 100vh;
 	}	
 }
 .show-about{
@@ -261,8 +263,6 @@ h1#cta{
 		}	
 	}
 	@include breakpoint(tablet){
-		//overflow: scroll;
-		//padding-top: 100vh;
 		min-height: 100vh;
 		padding-top: 0;
 		position: fixed;
@@ -278,17 +278,20 @@ h1#cta{
 				transform: scale(1);	
 			}
 			&.top{
-				top:30px;
-				right:30px;
+				bottom: 33.33%;
+			    left: 50%;
+			    transform: translateX(-50%);
 			}
-			&.bottom{
-				bottom:30px;
-				left: 30px;
-			}
-			//justify-content: center;
-			//flex-direction: column;
 		}	
 	}
+    @include breakpoint(tablet-landscape){
+	    > div.top{
+		    left:75%;
+		    bottom:50%;
+		    transform: translateX(-50%) translateY(50%);
+	    }
+    }
+	
 }
 .give-treat{
 	#grid > div > div:hover{
@@ -371,6 +374,7 @@ h1#cta{
 		transform:translateX(-55%) translateY(-60%) matrix(1, 0, 0, 1, 50vw, 50vh);
 		-webkit-backface-visibility:hidden;
 		backface-visibility:hidden;
+		will-change: transform;
 	}
 	@for $i from 1 through 43 {
 		img:nth-of-type(#{$i}){
