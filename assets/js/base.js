@@ -236,19 +236,9 @@ var dog = (function () {
 			    pant.fade(0, 0.05, 200);	
 			    $this = $(this);
 				$.getJSON("https://api.countapi.xyz/hit/bones.dog/visits", function(response) {
-					//$("#visits").text(commaSeparateNumber(response.value));
 					$('#count').fitText(1);
 				   $('#count h2').html(commaSeparateNumber(127466 + response.value));
 				   $('body').addClass('show-count');
-				});
-				$.ajax({
-					url: 'treat.php', 
-					success: function(result){
-						$('#count').fitText(1);
-				   		$('#count h2').html(commaSeparateNumber(result));
-				   		$('body').addClass('show-count');
-				   		
-					}
 				});
 				$eat = setTimeout(function(){
 					sniff.volume(0);
