@@ -235,6 +235,12 @@ var dog = (function () {
 				sniff.fade(0.5, 0, 200);
 			    pant.fade(0, 0.05, 200);	
 			    $this = $(this);
+				$.getJSON("https://api.countapi.xyz/hit/bones.dog/visits", function(response) {
+					//$("#visits").text(commaSeparateNumber(response.value));
+					$('#count').fitText(1);
+				   $('#count h2').html(commaSeparateNumber(127466 + response.value));
+				   $('body').addClass('show-count');
+				});
 				$.ajax({
 					url: 'treat.php', 
 					success: function(result){
